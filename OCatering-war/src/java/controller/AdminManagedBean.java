@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package controller;
 
+import MySsbean.AdminFacadeLocal;
 import dao.UserDAO;
 import java.sql.SQLException;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -14,21 +17,31 @@ import javax.faces.context.FacesContext;
 
 /**
  *
- * @author Khanh
+ * @author K
  */
-@ManagedBean
+@ManagedBean(name = "adminManagedBean1")
 @RequestScoped
+public class AdminManagedBean {
+    @EJB
+    private AdminFacadeLocal adminFacade;
 
-public class UserManagedBean {
+    public String admin_us,admin_email,password;
+    public boolean status;
 
-    private String username, password;
-
-    public String getUsername() {
-        return username;
+    public String getAdmin_us() {
+        return admin_us;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAdmin_us(String admin_us) {
+        this.admin_us = admin_us;
+    }
+
+    public String getAdmin_email() {
+        return admin_email;
+    }
+
+    public void setAdmin_email(String admin_email) {
+        this.admin_email = admin_email;
     }
 
     public String getPassword() {
@@ -39,18 +52,24 @@ public class UserManagedBean {
         this.password = password;
     }
 
-    public UserManagedBean(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public boolean isStatus() {
+        return status;
     }
 
-    public UserManagedBean() {
+    public void setStatus(boolean status) {
+        this.status = status;
     }
-
+    
+    /**
+     * Creates a new instance of AdminManagedBean
+     */
+    public AdminManagedBean() {
+    }
+    
     public String login() throws SQLException {
         UserDAO udao = new UserDAO();
 //        if (udao.check(username, password)) {
-        if(username!=""){
+        if(admin_us!=""){
 //            return "index";
 //            FacesContext fc = FacesContext.getCurrentInstance();
 //            fc.addMessage(null, new FacesMessage("Login success!"));
