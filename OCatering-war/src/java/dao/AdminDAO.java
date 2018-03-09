@@ -16,7 +16,7 @@ import java.sql.SQLException;
  *
  * @author Khanh
  */
-public class UserDAO {
+public class AdminDAO {
     public boolean check(String u, String p) throws SQLException {
         Connection conn = DBConnection.getConnection();
         MainMethod mmt = new MainMethod();

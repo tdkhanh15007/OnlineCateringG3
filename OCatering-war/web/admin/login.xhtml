@@ -16,17 +16,17 @@
                     <legend>Log in</legend>
 
                     <label for="login">Username</label>
-                    <h:inputText id="login" value="#{userManagedBean.username}"/>
+                    <h:inputText id="login" value="#{adminManagedBean1.admin_us}"/>
                     <div class="clear"></div>
                     <label for="password">Password</label>
-                    <h:inputSecret id="password" value="#{userManagedBean.password}"/>
+                    <h:inputSecret id="password" value="#{adminManagedBean1.password}"/>
                     <div class="clear"></div>
 
                     <label for="remember_me" style="padding: 0;">Remember me?</label>
                     <input type="checkbox" id="remember_me" style="position: relative; top: 3px; margin: 0; " name="remember_me"/>
                     <div class="clear"></div><br />
 
-                    <h:commandButton type="submit" style="margin: -20px 0 0 287px;" class="button" action="#{userManagedBean.login}" value="Log in"/>	
+                    <h:commandButton type="submit" style="margin: -20px 0 0 287px;" class="button" action="#{adminManagedBean1.login()}" value="Log in"/>	
                 </fieldset>
             </h:form>
         </f:view>

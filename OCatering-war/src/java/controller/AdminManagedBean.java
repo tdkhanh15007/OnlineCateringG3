@@ -7,7 +7,7 @@
 package controller;
 
 import MySsbean.AdminFacadeLocal;
-import dao.UserDAO;
+import dao.AdminDAO;
 import java.sql.SQLException;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -67,13 +67,11 @@ public class AdminManagedBean {
     }
     
     public String login() throws SQLException {
-        UserDAO udao = new UserDAO();
-//        if (udao.check(username, password)) {
-        if(admin_us!=""){
-//            return "index";
-//            FacesContext fc = FacesContext.getCurrentInstance();
-//            fc.addMessage(null, new FacesMessage("Login success!"));
-            return "index";
+        AdminDAO udao = new AdminDAO();
+        if (udao.check(admin_us, password)) {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            fc.addMessage(null, new FacesMessage("Login success!"));
+            return "index.xhtml";
         } else {
             FacesContext fc = FacesContext.getCurrentInstance();
             fc.addMessage(null, new FacesMessage("Username of password invalid!"));
