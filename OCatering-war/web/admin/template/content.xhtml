@@ -3,17 +3,19 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"   
       xmlns:ui="http://java.sun.com/jsf/facelets"
-          
+
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <body>
         <ui:composition>	
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Page Header
-                        <small>Optional description</small>
+                        Admin List
+                        <small>(Total users under Admin permissions)</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -23,15 +25,36 @@
 
                 <!-- Main content -->
                 <section class="content">
-                    
+
                     <!-- Your Page Content Here -->
-                    <p:button value="Show"/>
+                    <p:dataTable value="#{adminManagedBean1.showAll()}" var="item" editable="true" editMode="cell">
+                        <p:column>
+                            <f:facet name="header">Username</f:facet> 
+                                #{item.adminUs}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Email</f:facet> 
+                                #{item.adminEmail}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">Status</f:facet> 
+                            <h:graphicImage id="correctImage" value="images/icons8-checkmark-24.png" rendered="#{item.status}"/>
+                            <h:graphicImage id="notCorrectImage" value="images/icons8-delete-24.png" rendered="#{not item.status}"/>
+                        </p:column>
+                        <p:column>
+                            <h:form>
+                                <h:commandLink action="#{adminManagedBean1.findAdmin(item.adminUs)}">
+                                    <h:graphicImage id="correctImage" value="images/icons8-edit-property-24.png"/>
+                                </h:commandLink>
+                            </h:form>
+                        </p:column>
+                    </p:dataTable>
 
                 </section><!-- /.content -->
             </div><!-- /.content-wrapper -->
 
             <!-- Main Footer -->
-            
+
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">
