@@ -16,10 +16,12 @@ import java.sql.SQLException;
  *
  * @author Khanh
  */
-public class UserDAO {
+public class AdminDAO {
     public boolean check(String u, String p) throws SQLException {
         Connection conn = DBConnection.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("Select * From Admin Where admin_us='" + u + "' and password='" + p + "'");
+        MainMethod mmt = new MainMethod();
+        String pass = mmt.covertoMD5(p);
+        PreparedStatement stmt = conn.prepareStatement("Select * From Admin Where admin_us='" + u + "' and password='" + pass + "'");
         ResultSet rs = stmt.executeQuery();
         int count = 0;
         while (rs.next()) {

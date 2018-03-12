@@ -8,6 +8,9 @@ package connectionDb;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,11 +24,14 @@ public class DBConnection {
     private static String PASS = "sa";
 
     public static Connection getConnection() {
+        Connection conn = null;
         try {
-            Class.forName(DRIVER);
-            conn = DriverManager.getConnection(URL, USER, PASS);
-        } catch (Exception e) {
-            System.out.println(e);
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            conn = DriverManager.getConnection("jdbc:sqlserver://localhost:1433;databaseName=OnlineCatering", "sa", "sa");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         return conn;
     }
