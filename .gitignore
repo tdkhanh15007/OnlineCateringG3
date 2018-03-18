@@ -6,3 +6,13 @@
 /build/
 /OCatering-war/dist/
 /OCatering-ejb/dist/
+/dist/
+/test1/nbproject/private/
+/test1/test1-war/nbproject/private/
+/test1/test1-ejb/nbproject/private/
+/test1/test1-ejb/build/
+/test1/test1-war/build/
+/test1/test1-ejb/dist/
+/test1/build/
+/test1/test1-war/dist/
+/test1/dist/

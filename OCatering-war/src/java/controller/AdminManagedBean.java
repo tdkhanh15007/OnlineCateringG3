@@ -21,38 +21,48 @@ import javax.faces.context.FacesContext;
  *
  * @author K
  */
-@ManagedBean(name = "adminManagedBean1")
+@ManagedBean
 @RequestScoped
 public class AdminManagedBean {
 
     @EJB
     private AdminFacadeLocal adminFacade;
 
-    public String admin_us, admin_email, password , pass2;
+    public AdminManagedBean() {
+    }
+    public String adm_us,adm_email,adm_pass,mess="",pass2;
     public boolean status;
 
-    public String getAdmin_us() {
-        return admin_us;
+    public String getAdm_us() {
+        return adm_us;
     }
 
-    public void setAdmin_us(String admin_us) {
-        this.admin_us = admin_us;
+    public void setAdm_us(String adm_us) {
+        this.adm_us = adm_us;
     }
 
-    public String getAdmin_email() {
-        return admin_email;
+    public String getAdm_email() {
+        return adm_email;
     }
 
-    public void setAdmin_email(String admin_email) {
-        this.admin_email = admin_email;
+    public void setAdm_email(String adm_email) {
+        this.adm_email = adm_email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getAdm_pass() {
+        return adm_pass;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAdm_pass(String adm_pass) {
+        this.adm_pass = adm_pass;
+    }
+
+    public String getMess() {
+        return mess;
+    }
+
+    public void setMess(String mess) {
+        this.mess = mess;
     }
 
     public boolean isStatus() {
@@ -70,47 +80,46 @@ public class AdminManagedBean {
     public void setPass2(String pass2) {
         this.pass2 = pass2;
     }
-
-    /**
-     * Creates a new instance of AdminManagedBean
-     */
-    public AdminManagedBean() {
-    }
-
-    public String login() throws SQLException {
-        AdminDAO udao = new AdminDAO();
-        if (udao.check(admin_us, password)) {
-            return "index";
-        } else {
-            FacesContext fc = FacesContext.getCurrentInstance();
-            fc.addMessage(null, new FacesMessage("Username of password invalid!"));
-            return null;
-        }
-    }
-
-    public List<Admin> showAll() {
-        try {
-            return adminFacade.findAll();
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public String findAdmin(String us) {
-        Admin adm = adminFacade.find(us);
-        setAdmin_us(adm.getAdminUs());
-        setAdmin_email(adm.getAdminEmail());
-        return "updateadmin";
+    
+    public List<Admin> listAdm(){
+        return adminFacade.findAll();
     }
     
-    public String updateAdmin(){
-        Admin adm = adminFacade.find(admin_us);
-        MainMethod mmt = new MainMethod();
-        String md5pass = mmt.covertoMD5(password);
-        adm.setAdminEmail(admin_email);
-        adm.setPassword(md5pass);
-        adm.setStatus(status);
-        adminFacade.edit(adm);
-        return "listadmin";
+    public String createAdm(){
+        try{
+            Admin adm = new Admin(adm_us, adm_email, adm_pass, status);
+            adminFacade.create(adm);
+            return "index";
+        }catch(Exception e){
+            mess = e.getMessage().toString();
+            return "createadm";
+        }
+    }
+    
+    public String findAdm(String us){
+        try{
+            Admin adm = adminFacade.find(us);
+            setAdm_us(adm.getAdminUs());
+            setAdm_email(adm.getAdminEmail());
+            setAdm_pass("");
+            setStatus(adm.getStatus());
+            return "updateadm";
+        }catch(Exception e){
+            return "index";
+        }        
+    }
+    
+    public String updateAdm(String us){
+        try{
+            Admin adm = adminFacade.find(us);
+            adm.setAdminEmail(adm_email);
+            adm.setPassword(adm_pass);
+            adm.setStatus(status);
+            adminFacade.edit(adm);
+            return "index";
+        }catch(Exception e){
+            mess = e.getMessage().toString();
+            return "updateadm";
+        }
     }
 }

@@ -21,7 +21,7 @@ public class AdminDAO {
         Connection conn = DBConnection.getConnection();
         MainMethod mmt = new MainMethod();
         String pass = mmt.covertoMD5(p);
-        PreparedStatement stmt = conn.prepareStatement("Select * From Admin Where admin_us='" + u + "' and password='" + pass + "'");
+        PreparedStatement stmt = conn.prepareStatement("Select * From Admin Where admin_us='" + u + "' and password='" + pass + "' and status = 'true'");
         ResultSet rs = stmt.executeQuery();
         int count = 0;
         while (rs.next()) {

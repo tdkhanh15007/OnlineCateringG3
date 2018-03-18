@@ -10,27 +10,24 @@
         <ui:composition template="template/commonLayout.xhtml">
             <ui:define name="content">
                 <div class="content-wrapper">
-                    <h:form>
-                        <h:inputHidden id="admin_us" value="#{adminManagedBean1.admin_us}"/>
-                        <h:panelGrid columns="2">                            
-                            <h:outputLabel for="admin_us" value="Username"/>
-                            <p:inputText id="u_username" value="#{adminManagedBean1.admin_us}" readonly="true"/>
-
+                    <h:form>     
+                        <h:inputHidden value="#{adminManagedBean.adm_us}"/>
+                        <h:panelGrid columns="2">
                             <h:outputLabel for="admin_email" value="Email"/>
-                            <p:inputText id="u_email" value="#{adminManagedBean1.admin_email}"/>
+                            <h:inputText value="#{adminManagedBean.adm_email}"/>
 
                             <h:outputLabel for="pass1" value="Password"/>
-                            <p:inputText id="u_pass1" value="#{adminManagedBean1.password}"/>
+                            <h:inputText value="#{adminManagedBean.adm_pass}"/>
                             <h:outputLabel for="pass2" value="Confirm Password"/>
-                            <p:inputText id="u_pass2" value="#{adminManagedBean1.pass2}"/>
+                            <h:inputText value="#{adminManagedBean.pass2}"/>
 
                             <h:outputLabel for="admin_stt" value="Status"/>
-                            <h:selectOneRadio id="u_stt" value="#{adminManagedBean1.status}">
-                                <f:selectItem itemLabel="Active" itemValue="1" />
-                                <f:selectItem itemLabel="Disable" itemValue="0" />
+                            <h:selectOneRadio value="#{adminManagedBean.status}">
+                                <f:selectItem itemLabel="Active" itemValue="#{true}" />
+                                <f:selectItem itemLabel="Disable" itemValue="#{false}" />
                             </h:selectOneRadio>               
-                            <p:commandButton value="Update" type="submit" action="#{adminManagedBean1.updateAdmin()}"/>
-                            <p:commandButton value="Reset" type="reset" />
+                            <h:commandButton value="Update" type="submit" action="#{adminManagedBean.updateAdm(adminManagedBean.adm_us)}"/>
+                            <h:commandButton value="Reset" type="reset" />
                         </h:panelGrid>
                     </h:form>
                 </div>
