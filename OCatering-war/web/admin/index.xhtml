@@ -9,7 +9,7 @@
     <h:body>
 
         <ui:composition template="template/commonLayout.xhtml">
-            <ui:define name="content">
+            <ui:define name="content">                
                 <div class="content-wrapper">
                     <!-- Content Header (Page header) -->
                     <section class="content-header">
@@ -17,6 +17,7 @@
                             Admin List
                             <small>(Total users under Admin permissions)</small>
                         </h1>
+                        <h:link outcome="createadm" value="Create"/>
                         <ol class="breadcrumb">
                             <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
                             <li class="active">Here</li>
@@ -44,7 +45,7 @@
                             <p:column>
                                 <h:form>
                                     <h:commandLink action="#{adminManagedBean.findAdm(item.adminUs)}">
-                                        <h:graphicImage id="correctImage" value="images/icons8-edit-property-24.png"/>
+                                        <h:graphicImage value="images/icons8-edit-property-24.png"/>
                                     </h:commandLink>
                                 </h:form>
                             </p:column>
