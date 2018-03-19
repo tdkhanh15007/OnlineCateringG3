@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Embeddable
 public class SuppOrderDetailsPK implements Serializable {

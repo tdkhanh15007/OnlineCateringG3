@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Stateless
 public class MatSupFacade extends AbstractFacade<MatSup> implements MatSupFacadeLocal {

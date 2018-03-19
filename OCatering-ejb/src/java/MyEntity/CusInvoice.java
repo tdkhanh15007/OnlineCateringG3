@@ -7,6 +7,7 @@
 package MyEntity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,13 +17,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Entity
 @Table(name = "CusInvoice")
@@ -44,9 +46,9 @@ public class CusInvoice implements Serializable {
     private Integer cusinvoiceId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "invoicedate")
-    private String invoicedate;
+    @Temporal(TemporalType.DATE)
+    private Date invoicedate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "discount")
@@ -61,9 +63,9 @@ public class CusInvoice implements Serializable {
     private double prepaid;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "createdate")
-    private String createdate;
+    @Temporal(TemporalType.DATE)
+    private Date createdate;
     @JoinColumn(name = "cusorder_id", referencedColumnName = "cusorder_id")
     @ManyToOne(optional = false)
     private CusOrder cusorderId;
@@ -75,7 +77,7 @@ public class CusInvoice implements Serializable {
         this.cusinvoiceId = cusinvoiceId;
     }
 
-    public CusInvoice(Integer cusinvoiceId, String invoicedate, int discount, double price, double prepaid, String createdate) {
+    public CusInvoice(Integer cusinvoiceId, Date invoicedate, int discount, double price, double prepaid, Date createdate) {
         this.cusinvoiceId = cusinvoiceId;
         this.invoicedate = invoicedate;
         this.discount = discount;
@@ -92,11 +94,11 @@ public class CusInvoice implements Serializable {
         this.cusinvoiceId = cusinvoiceId;
     }
 
-    public String getInvoicedate() {
+    public Date getInvoicedate() {
         return invoicedate;
     }
 
-    public void setInvoicedate(String invoicedate) {
+    public void setInvoicedate(Date invoicedate) {
         this.invoicedate = invoicedate;
     }
 
@@ -124,11 +126,11 @@ public class CusInvoice implements Serializable {
         this.prepaid = prepaid;
     }
 
-    public String getCreatedate() {
+    public Date getCreatedate() {
         return createdate;
     }
 
-    public void setCreatedate(String createdate) {
+    public void setCreatedate(Date createdate) {
         this.createdate = createdate;
     }
 

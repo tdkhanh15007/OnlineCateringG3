@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Stateless
 public class FavListFacade extends AbstractFacade<FavList> implements FavListFacadeLocal {

@@ -8,6 +8,7 @@ package MyEntity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -21,6 +22,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -28,7 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Entity
 @Table(name = "CusOrder")
@@ -59,14 +62,14 @@ public class CusOrder implements Serializable {
     private Double costperplate;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "createdate")
-    private String createdate;
+    @Temporal(TemporalType.DATE)
+    private Date createdate;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "deliverydate")
-    private String deliverydate;
+    @Temporal(TemporalType.DATE)
+    private Date deliverydate;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 200)
@@ -105,7 +108,7 @@ public class CusOrder implements Serializable {
         this.cusorderId = cusorderId;
     }
 
-    public CusOrder(Integer cusorderId, int quantity, String createdate, String deliverydate, String deliveryaddress, boolean status) {
+    public CusOrder(Integer cusorderId, int quantity, Date createdate, Date deliverydate, String deliveryaddress, boolean status) {
         this.cusorderId = cusorderId;
         this.quantity = quantity;
         this.createdate = createdate;
@@ -138,19 +141,19 @@ public class CusOrder implements Serializable {
         this.costperplate = costperplate;
     }
 
-    public String getCreatedate() {
+    public Date getCreatedate() {
         return createdate;
     }
 
-    public void setCreatedate(String createdate) {
+    public void setCreatedate(Date createdate) {
         this.createdate = createdate;
     }
 
-    public String getDeliverydate() {
+    public Date getDeliverydate() {
         return deliverydate;
     }
 
-    public void setDeliverydate(String deliverydate) {
+    public void setDeliverydate(Date deliverydate) {
         this.deliverydate = deliverydate;
     }
 

@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Entity
 @Table(name = "Foods")
@@ -59,6 +59,8 @@ public class Foods implements Serializable {
     private String img;
     @ManyToMany(mappedBy = "foodsCollection")
     private Collection<Caterer> catererCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "foods")
+    private Collection<CusOrderDetails> cusOrderDetailsCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "foods")
     private Collection<FoodMat> foodMatCollection;
     @JoinColumn(name = "cat_id", referencedColumnName = "cat_id")
@@ -116,6 +118,15 @@ public class Foods implements Serializable {
 
     public void setCatererCollection(Collection<Caterer> catererCollection) {
         this.catererCollection = catererCollection;
+    }
+
+    @XmlTransient
+    public Collection<CusOrderDetails> getCusOrderDetailsCollection() {
+        return cusOrderDetailsCollection;
+    }
+
+    public void setCusOrderDetailsCollection(Collection<CusOrderDetails> cusOrderDetailsCollection) {
+        this.cusOrderDetailsCollection = cusOrderDetailsCollection;
     }
 
     @XmlTransient

@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Entity
 @Table(name = "Caterer")
@@ -98,14 +98,15 @@ public class Caterer implements Serializable {
         this.catererUs = catererUs;
     }
 
-    public Caterer(String catererUs, String password, String address, boolean status, String phone, String catererName) {
+    public Caterer(String catererUs, String password, String address, boolean status, String phone, String catererName, District districtId) {
         this.catererUs = catererUs;
         this.password = password;
         this.address = address;
         this.status = status;
         this.phone = phone;
         this.catererName = catererName;
-    }
+        this.districtId = districtId;
+    }    
 
     public String getCatererUs() {
         return catererUs;

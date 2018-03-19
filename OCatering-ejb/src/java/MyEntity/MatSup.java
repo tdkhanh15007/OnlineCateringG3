@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Entity
 @Table(name = "MatSup")

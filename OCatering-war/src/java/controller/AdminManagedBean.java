@@ -91,7 +91,7 @@ public class AdminManagedBean {
             adminFacade.create(adm);
             return "index";
         }catch(Exception e){
-            mess = e.getMessage().toString();
+            mess = "Can not create.";
             return "createadm";
         }
     }
@@ -118,7 +118,7 @@ public class AdminManagedBean {
             adminFacade.edit(adm);
             return "index";
         }catch(Exception e){
-            mess = e.getMessage().toString();
+            mess = "Can not update.";
             return "updateadm";
         }
     }

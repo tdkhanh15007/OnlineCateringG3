@@ -7,6 +7,7 @@
 package MyEntity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,13 +17,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Entity
 @Table(name = "SuppInvoice")
@@ -42,14 +44,14 @@ public class SuppInvoice implements Serializable {
     private Integer suppinvoiceId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "paiddate")
-    private String paiddate;
+    @Temporal(TemporalType.DATE)
+    private Date paiddate;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "createdate")
-    private String createdate;
+    @Temporal(TemporalType.DATE)
+    private Date createdate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "amountpaid")
@@ -65,7 +67,7 @@ public class SuppInvoice implements Serializable {
         this.suppinvoiceId = suppinvoiceId;
     }
 
-    public SuppInvoice(Integer suppinvoiceId, String paiddate, String createdate, double amountpaid) {
+    public SuppInvoice(Integer suppinvoiceId, Date paiddate, Date createdate, double amountpaid) {
         this.suppinvoiceId = suppinvoiceId;
         this.paiddate = paiddate;
         this.createdate = createdate;
@@ -80,19 +82,19 @@ public class SuppInvoice implements Serializable {
         this.suppinvoiceId = suppinvoiceId;
     }
 
-    public String getPaiddate() {
+    public Date getPaiddate() {
         return paiddate;
     }
 
-    public void setPaiddate(String paiddate) {
+    public void setPaiddate(Date paiddate) {
         this.paiddate = paiddate;
     }
 
-    public String getCreatedate() {
+    public Date getCreatedate() {
         return createdate;
     }
 
-    public void setCreatedate(String createdate) {
+    public void setCreatedate(Date createdate) {
         this.createdate = createdate;
     }
 

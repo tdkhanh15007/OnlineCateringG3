@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Entity
 @Table(name = "Material")
@@ -46,7 +46,9 @@ public class Material implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "name")
     private String name;
-    @Size(max = 20)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "count")
     private String count;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "material")
@@ -63,9 +65,10 @@ public class Material implements Serializable {
         this.matId = matId;
     }
 
-    public Material(Integer matId, String name) {
+    public Material(Integer matId, String name, String count) {
         this.matId = matId;
         this.name = name;
+        this.count = count;
     }
 
     public Integer getMatId() {

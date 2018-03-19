@@ -7,6 +7,7 @@
 package MyEntity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,13 +17,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Entity
 @Table(name = "WorkerSalary")
@@ -51,14 +53,14 @@ public class WorkerSalary implements Serializable {
     private double totalpay;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "fromdate")
-    private String fromdate;
+    @Temporal(TemporalType.DATE)
+    private Date fromdate;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "todate")
-    private String todate;
+    @Temporal(TemporalType.DATE)
+    private Date todate;
     @JoinColumn(name = "worker_id", referencedColumnName = "worker_id")
     @ManyToOne(optional = false)
     private Worker workerId;
@@ -70,7 +72,7 @@ public class WorkerSalary implements Serializable {
         this.salaryId = salaryId;
     }
 
-    public WorkerSalary(Integer salaryId, int workingdays, double totalpay, String fromdate, String todate) {
+    public WorkerSalary(Integer salaryId, int workingdays, double totalpay, Date fromdate, Date todate) {
         this.salaryId = salaryId;
         this.workingdays = workingdays;
         this.totalpay = totalpay;
@@ -102,19 +104,19 @@ public class WorkerSalary implements Serializable {
         this.totalpay = totalpay;
     }
 
-    public String getFromdate() {
+    public Date getFromdate() {
         return fromdate;
     }
 
-    public void setFromdate(String fromdate) {
+    public void setFromdate(Date fromdate) {
         this.fromdate = fromdate;
     }
 
-    public String getTodate() {
+    public Date getTodate() {
         return todate;
     }
 
-    public void setTodate(String todate) {
+    public void setTodate(Date todate) {
         this.todate = todate;
     }
 

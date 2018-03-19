@@ -12,7 +12,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Local
 public interface SupplierFacadeLocal {

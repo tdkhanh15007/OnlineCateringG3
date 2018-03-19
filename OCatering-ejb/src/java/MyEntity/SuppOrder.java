@@ -8,6 +8,7 @@ package MyEntity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,14 +20,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Entity
 @Table(name = "SuppOrder")
@@ -47,14 +49,14 @@ public class SuppOrder implements Serializable {
     private Integer suporderId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "createdate")
-    private String createdate;
+    @Temporal(TemporalType.DATE)
+    private Date createdate;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "deliverydate")
-    private String deliverydate;
+    @Temporal(TemporalType.DATE)
+    private Date deliverydate;
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
@@ -81,7 +83,7 @@ public class SuppOrder implements Serializable {
         this.suporderId = suporderId;
     }
 
-    public SuppOrder(Integer suporderId, String createdate, String deliverydate, double price, boolean status) {
+    public SuppOrder(Integer suporderId, Date createdate, Date deliverydate, double price, boolean status) {
         this.suporderId = suporderId;
         this.createdate = createdate;
         this.deliverydate = deliverydate;
@@ -97,19 +99,19 @@ public class SuppOrder implements Serializable {
         this.suporderId = suporderId;
     }
 
-    public String getCreatedate() {
+    public Date getCreatedate() {
         return createdate;
     }
 
-    public void setCreatedate(String createdate) {
+    public void setCreatedate(Date createdate) {
         this.createdate = createdate;
     }
 
-    public String getDeliverydate() {
+    public Date getDeliverydate() {
         return deliverydate;
     }
 
-    public void setDeliverydate(String deliverydate) {
+    public void setDeliverydate(Date deliverydate) {
         this.deliverydate = deliverydate;
     }
 

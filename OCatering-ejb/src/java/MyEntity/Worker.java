@@ -8,6 +8,7 @@ package MyEntity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,6 +21,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author K
+ * @author Khanh
  */
 @Entity
 @Table(name = "Worker")
@@ -63,9 +66,9 @@ public class Worker implements Serializable {
     private String phone;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "datejoin")
-    private String datejoin;
+    @Temporal(TemporalType.DATE)
+    private Date datejoin;
     @Basic(optional = false)
     @NotNull
     @Column(name = "district_id")
@@ -85,7 +88,7 @@ public class Worker implements Serializable {
         this.workerId = workerId;
     }
 
-    public Worker(Integer workerId, String name, String phone, String datejoin, int districtId) {
+    public Worker(Integer workerId, String name, String phone, Date datejoin, int districtId) {
         this.workerId = workerId;
         this.name = name;
         this.phone = phone;
@@ -125,11 +128,11 @@ public class Worker implements Serializable {
         this.phone = phone;
     }
 
-    public String getDatejoin() {
+    public Date getDatejoin() {
         return datejoin;
     }
 
-    public void setDatejoin(String datejoin) {
+    public void setDatejoin(Date datejoin) {
         this.datejoin = datejoin;
     }
 
