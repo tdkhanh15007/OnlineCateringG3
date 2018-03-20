@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -40,7 +42,7 @@ public class WorkerSalary implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "salary_id")
     private Integer salaryId;
     @Basic(optional = false)
@@ -151,6 +153,14 @@ public class WorkerSalary implements Serializable {
     @Override
     public String toString() {
         return "MyEntity.WorkerSalary[ salaryId=" + salaryId + " ]";
+    }
+
+    public WorkerSalary(int workingdays, double totalpay, Date fromdate, Date todate, Worker workerId) {
+        this.workingdays = workingdays;
+        this.totalpay = totalpay;
+        this.fromdate = fromdate;
+        this.todate = todate;
+        this.workerId = workerId;
     }
     
 }

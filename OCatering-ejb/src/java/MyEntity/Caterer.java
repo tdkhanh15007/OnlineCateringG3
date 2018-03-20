@@ -98,15 +98,14 @@ public class Caterer implements Serializable {
         this.catererUs = catererUs;
     }
 
-    public Caterer(String catererUs, String password, String address, boolean status, String phone, String catererName, District districtId) {
+    public Caterer(String catererUs, String password, String address, boolean status, String phone, String catererName) {
         this.catererUs = catererUs;
         this.password = password;
         this.address = address;
         this.status = status;
         this.phone = phone;
         this.catererName = catererName;
-        this.districtId = districtId;
-    }    
+    }
 
     public String getCatererUs() {
         return catererUs;
@@ -233,5 +232,16 @@ public class Caterer implements Serializable {
     public String toString() {
         return "MyEntity.Caterer[ catererUs=" + catererUs + " ]";
     }
+
+    public Caterer(String catererUs, String password, String address, boolean status, String phone, String catererName, District districtId) {
+        this.catererUs = catererUs;
+        this.password = password;
+        this.address = address;
+        this.status = status;
+        this.phone = phone;
+        this.catererName = catererName;
+        this.districtId = districtId;
+    }
+    
     
 }

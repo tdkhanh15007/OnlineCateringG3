@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -42,7 +44,7 @@ public class Supplier implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sup_id")
     private Integer supId;
     @Basic(optional = false)
@@ -80,16 +82,13 @@ public class Supplier implements Serializable {
         this.supId = supId;
     }
 
-    public Supplier(Integer supId, String name, String address, String phone, boolean status, District districtId) {
+    public Supplier(Integer supId, String name, String address, String phone, boolean status) {
         this.supId = supId;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.status = status;
-        this.districtId = districtId;
     }
-
-    
 
     public Integer getSupId() {
         return supId;
@@ -181,5 +180,14 @@ public class Supplier implements Serializable {
     public String toString() {
         return "MyEntity.Supplier[ supId=" + supId + " ]";
     }
+
+    public Supplier(String name, String address, String phone, boolean status, District districtId) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.status = status;
+        this.districtId = districtId;
+    }
+    
     
 }

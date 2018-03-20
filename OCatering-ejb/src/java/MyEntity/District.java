@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -37,7 +39,7 @@ public class District implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "district_id")
     private Integer districtId;
     @Basic(optional = false)
@@ -141,6 +143,10 @@ public class District implements Serializable {
     @Override
     public String toString() {
         return "MyEntity.District[ districtId=" + districtId + " ]";
+    }
+
+    public District(String distname) {
+        this.distname = distname;
     }
     
 }

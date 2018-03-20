@@ -10,6 +10,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,7 +35,7 @@ public class FavList implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "fav_id")
     private Integer favId;
     @JoinColumn(name = "caterer_us", referencedColumnName = "caterer_us")
@@ -97,6 +99,11 @@ public class FavList implements Serializable {
     @Override
     public String toString() {
         return "MyEntity.FavList[ favId=" + favId + " ]";
+    }
+
+    public FavList(Caterer catererUs, Customer cusUs) {
+        this.catererUs = catererUs;
+        this.cusUs = cusUs;
     }
     
 }

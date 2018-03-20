@@ -13,6 +13,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -44,7 +46,7 @@ public class SuppOrder implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "suporder_id")
     private Integer suporderId;
     @Basic(optional = false)
@@ -188,6 +190,15 @@ public class SuppOrder implements Serializable {
     @Override
     public String toString() {
         return "MyEntity.SuppOrder[ suporderId=" + suporderId + " ]";
+    }
+
+    public SuppOrder(Date createdate, Date deliverydate, double price, boolean status, Caterer catererUs, Supplier supId) {
+        this.createdate = createdate;
+        this.deliverydate = deliverydate;
+        this.price = price;
+        this.status = status;
+        this.catererUs = catererUs;
+        this.supId = supId;
     }
     
 }

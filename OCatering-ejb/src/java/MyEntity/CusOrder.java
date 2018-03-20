@@ -13,6 +13,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -50,7 +52,7 @@ public class CusOrder implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cusorder_id")
     private Integer cusorderId;
     @Basic(optional = false)
@@ -255,6 +257,19 @@ public class CusOrder implements Serializable {
     @Override
     public String toString() {
         return "MyEntity.CusOrder[ cusorderId=" + cusorderId + " ]";
+    }
+
+    public CusOrder(int quantity, Double costperplate, Date createdate, Date deliverydate, String deliveryaddress, String note, boolean status, Caterer catererUs, Customer cusUs, District districtId) {
+        this.quantity = quantity;
+        this.costperplate = costperplate;
+        this.createdate = createdate;
+        this.deliverydate = deliverydate;
+        this.deliveryaddress = deliveryaddress;
+        this.note = note;
+        this.status = status;
+        this.catererUs = catererUs;
+        this.cusUs = cusUs;
+        this.districtId = districtId;
     }
     
 }

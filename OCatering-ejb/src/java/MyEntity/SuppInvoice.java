@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -39,7 +41,7 @@ public class SuppInvoice implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "suppinvoice_id")
     private Integer suppinvoiceId;
     @Basic(optional = false)
@@ -137,6 +139,13 @@ public class SuppInvoice implements Serializable {
     @Override
     public String toString() {
         return "MyEntity.SuppInvoice[ suppinvoiceId=" + suppinvoiceId + " ]";
+    }
+
+    public SuppInvoice(Date paiddate, Date createdate, double amountpaid, SuppOrder suporderId) {
+        this.paiddate = paiddate;
+        this.createdate = createdate;
+        this.amountpaid = amountpaid;
+        this.suporderId = suporderId;
     }
     
 }

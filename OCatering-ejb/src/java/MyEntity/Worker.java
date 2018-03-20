@@ -13,6 +13,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -47,7 +49,7 @@ public class Worker implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "worker_id")
     private Integer workerId;
     @Basic(optional = false)
@@ -193,6 +195,15 @@ public class Worker implements Serializable {
     @Override
     public String toString() {
         return "MyEntity.Worker[ workerId=" + workerId + " ]";
+    }
+
+    public Worker(String name, String address, String phone, Date datejoin, int districtId, WorkerType worktypeId) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+        this.datejoin = datejoin;
+        this.districtId = districtId;
+        this.worktypeId = worktypeId;
     }
     
 }

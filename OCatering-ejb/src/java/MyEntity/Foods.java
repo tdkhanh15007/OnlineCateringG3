@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -42,7 +44,7 @@ public class Foods implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "food_id")
     private Integer foodId;
     @Basic(optional = false)
@@ -169,6 +171,13 @@ public class Foods implements Serializable {
     @Override
     public String toString() {
         return "MyEntity.Foods[ foodId=" + foodId + " ]";
+    }
+
+    public Foods(String name, String description, String img, Category catId) {
+        this.name = name;
+        this.description = description;
+        this.img = img;
+        this.catId = catId;
     }
     
 }

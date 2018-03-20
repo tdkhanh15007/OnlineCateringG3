@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -38,7 +40,7 @@ public class WorkerType implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "worktype_id")
     private Integer worktypeId;
     @Basic(optional = false)
@@ -122,6 +124,11 @@ public class WorkerType implements Serializable {
     @Override
     public String toString() {
         return "MyEntity.WorkerType[ worktypeId=" + worktypeId + " ]";
+    }
+
+    public WorkerType(String type, double payperday) {
+        this.type = type;
+        this.payperday = payperday;
     }
     
 }
