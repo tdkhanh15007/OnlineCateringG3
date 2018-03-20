@@ -31,4 +31,5 @@ public interface WorkerFacadeLocal {
 
     int count();
     
+    List<Worker> findType(int type);
 }

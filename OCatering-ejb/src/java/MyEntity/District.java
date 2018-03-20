@@ -36,6 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "District.findByDistrictId", query = "SELECT d FROM District d WHERE d.districtId = :districtId"),
     @NamedQuery(name = "District.findByDistname", query = "SELECT d FROM District d WHERE d.distname = :distname")})
 public class District implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "districtId")
+    private Collection<Worker> workerCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -147,6 +149,15 @@ public class District implements Serializable {
 
     public District(String distname) {
         this.distname = distname;
+    }
+
+    @XmlTransient
+    public Collection<Worker> getWorkerCollection() {
+        return workerCollection;
+    }
+
+    public void setWorkerCollection(Collection<Worker> workerCollection) {
+        this.workerCollection = workerCollection;
     }
     
 }

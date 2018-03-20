@@ -43,9 +43,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Worker.findByName", query = "SELECT w FROM Worker w WHERE w.name = :name"),
     @NamedQuery(name = "Worker.findByAddress", query = "SELECT w FROM Worker w WHERE w.address = :address"),
     @NamedQuery(name = "Worker.findByPhone", query = "SELECT w FROM Worker w WHERE w.phone = :phone"),
-    @NamedQuery(name = "Worker.findByDatejoin", query = "SELECT w FROM Worker w WHERE w.datejoin = :datejoin"),
-    @NamedQuery(name = "Worker.findByDistrictId", query = "SELECT w FROM Worker w WHERE w.districtId = :districtId")})
+    @NamedQuery(name = "Worker.findByDatejoin", query = "SELECT w FROM Worker w WHERE w.datejoin = :datejoin")})
 public class Worker implements Serializable {
+    @ManyToMany(mappedBy = "workerCollection")
+    private Collection<CusOrder> cusOrderCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workerId")
+    private Collection<WorkerSalary> workerSalaryCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -71,14 +74,9 @@ public class Worker implements Serializable {
     @Column(name = "datejoin")
     @Temporal(TemporalType.DATE)
     private Date datejoin;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "district_id")
-    private int districtId;
-    @ManyToMany(mappedBy = "workerCollection")
-    private Collection<CusOrder> cusOrderCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workerId")
-    private Collection<WorkerSalary> workerSalaryCollection;
+    @JoinColumn(name = "district_id", referencedColumnName = "district_id")
+    @ManyToOne(optional = false)
+    private District districtId;
     @JoinColumn(name = "worktype_id", referencedColumnName = "worktype_id")
     @ManyToOne(optional = false)
     private WorkerType worktypeId;
@@ -90,12 +88,11 @@ public class Worker implements Serializable {
         this.workerId = workerId;
     }
 
-    public Worker(Integer workerId, String name, String phone, Date datejoin, int districtId) {
+    public Worker(Integer workerId, String name, String phone, Date datejoin) {
         this.workerId = workerId;
         this.name = name;
         this.phone = phone;
         this.datejoin = datejoin;
-        this.districtId = districtId;
     }
 
     public Integer getWorkerId() {
@@ -138,30 +135,12 @@ public class Worker implements Serializable {
         this.datejoin = datejoin;
     }
 
-    public int getDistrictId() {
+    public District getDistrictId() {
         return districtId;
     }
 
-    public void setDistrictId(int districtId) {
+    public void setDistrictId(District districtId) {
         this.districtId = districtId;
-    }
-
-    @XmlTransient
-    public Collection<CusOrder> getCusOrderCollection() {
-        return cusOrderCollection;
-    }
-
-    public void setCusOrderCollection(Collection<CusOrder> cusOrderCollection) {
-        this.cusOrderCollection = cusOrderCollection;
-    }
-
-    @XmlTransient
-    public Collection<WorkerSalary> getWorkerSalaryCollection() {
-        return workerSalaryCollection;
-    }
-
-    public void setWorkerSalaryCollection(Collection<WorkerSalary> workerSalaryCollection) {
-        this.workerSalaryCollection = workerSalaryCollection;
     }
 
     public WorkerType getWorktypeId() {
@@ -197,7 +176,25 @@ public class Worker implements Serializable {
         return "MyEntity.Worker[ workerId=" + workerId + " ]";
     }
 
-    public Worker(String name, String address, String phone, Date datejoin, int districtId, WorkerType worktypeId) {
+    @XmlTransient
+    public Collection<CusOrder> getCusOrderCollection() {
+        return cusOrderCollection;
+    }
+
+    public void setCusOrderCollection(Collection<CusOrder> cusOrderCollection) {
+        this.cusOrderCollection = cusOrderCollection;
+    }
+
+    @XmlTransient
+    public Collection<WorkerSalary> getWorkerSalaryCollection() {
+        return workerSalaryCollection;
+    }
+
+    public void setWorkerSalaryCollection(Collection<WorkerSalary> workerSalaryCollection) {
+        this.workerSalaryCollection = workerSalaryCollection;
+    }
+
+    public Worker(String name, String address, String phone, Date datejoin, District districtId, WorkerType worktypeId) {
         this.name = name;
         this.address = address;
         this.phone = phone;
