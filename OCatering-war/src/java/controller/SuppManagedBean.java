@@ -87,9 +87,6 @@ public class SuppManagedBean {
         this.status = status;
     }
     
-    public List<District> listD(){
-        return districtFacade.findAll();
-    }
     
     /**
      * Creates a new instance of SuppManagedBean
@@ -129,7 +126,9 @@ public class SuppManagedBean {
     
     public String createSupp(){
         try{
-            
+            District ds = districtFacade.find(distID);
+            Supplier sp = new Supplier(supID, name, address, phone, status, ds);
+            supplierFacade.create(sp);
             return "supplier";
         }catch(Exception e){
             return "createsupp";

@@ -80,13 +80,16 @@ public class Supplier implements Serializable {
         this.supId = supId;
     }
 
-    public Supplier(Integer supId, String name, String address, String phone, boolean status) {
+    public Supplier(Integer supId, String name, String address, String phone, boolean status, District districtId) {
         this.supId = supId;
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.status = status;
+        this.districtId = districtId;
     }
+
+    
 
     public Integer getSupId() {
         return supId;
