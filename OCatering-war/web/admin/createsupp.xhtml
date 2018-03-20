@@ -19,40 +19,44 @@
                     </section>
                     <section class="content">
                         <h:form>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="Name:"/>
-                <p:inputText value="#{suppManagedBean.name}">
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Name:"/>
+                                <p:inputText value="#{suppManagedBean.name}">
 
-                </p:inputText>
+                                </p:inputText>
 
-                <h:outputLabel value="Phone:"/>
-                <p:inputText value="#{suppManagedBean.phone}">
+                                <h:outputLabel value="Phone:"/>
+                                <p:inputText value="#{suppManagedBean.phone}">
 
-                </p:inputText>
+                                </p:inputText>
 
-                <h:outputLabel value="Address:"/>
-                <h:inputTextarea cols="30" rows="5">
+                                <h:outputLabel value="Address:"/>
+                                <h:inputTextarea cols="30" rows="5" value="#{suppManagedBean.address}">
 
-                </h:inputTextarea>
+                                </h:inputTextarea>
 
-                <h:outputLabel value="District:"/>
-                <h:selectOneMenu value="#{suppManagedBean.distID}">
-                    <f:selectItems value="#{catererManagedBean.listD()}" var="sup" itemLabel="#{sup.distname}" itemValue="#{sup.districtId}"/>
-                </h:selectOneMenu>
+                                <h:outputLabel value="District:"/>
+                                <h:selectOneMenu value="#{suppManagedBean.distID}">
+                                    <f:selectItems value="#{suppManagedBean.listD()}" var="sup" itemLabel="#{sup.distname}" itemValue="#{sup.districtId}"/>
+                                </h:selectOneMenu>
 
-                <h:outputLabel value="Status"/>
-                <p:selectOneRadio value="#{suppManagedBean.status}">
-                    <f:selectItem itemLabel="Active" itemValue="#{true}" />
-                    <f:selectItem itemLabel="Disable" itemValue="#{false}" />
-                </p:selectOneRadio> 
+                                <h:outputLabel value="Status"/>
+                                <p:selectOneRadio value="#{suppManagedBean.status}">
+                                    <f:selectItem itemLabel="Active" itemValue="#{true}" />
+                                    <f:selectItem itemLabel="Disable" itemValue="#{false}" />
+                                </p:selectOneRadio> 
 
-                <h:outputText value=""/>
-                <h:panelGroup>
-                    <h:commandButton style="background-color: #367fa9;height:40px; font-size: 14px; font-weight: bold; color: white" action="#{suppManagedBean.createSupp()}" value="Create" />  &nbsp;
-                    <h:commandButton style="background-color: #367fa9;height:40px; font-size: 14px; font-weight: bold; color: white" action="supplier" value="Back" />
-                </h:panelGroup>
-            </h:panelGrid>
-        </h:form>
+                                <h:outputText value=""/>
+                                <h:outputText value="#{suppManagedBean.mess}"/>
+
+
+                                <h:outputText value=""/>
+                                <h:panelGroup>
+                                    <h:commandButton style="background-color: #367fa9;height:40px; font-size: 14px; font-weight: bold; color: white" action="#{suppManagedBean.createSupp()}" value="Create" />  &nbsp;
+                                    <h:commandButton style="background-color: #367fa9;height:40px; font-size: 14px; font-weight: bold; color: white" action="supplier" value="Back" />
+                                </h:panelGroup>
+                            </h:panelGrid>
+                        </h:form>
                     </section>
                 </div>
             </ui:define>

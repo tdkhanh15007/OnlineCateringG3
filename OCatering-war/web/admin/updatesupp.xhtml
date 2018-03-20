@@ -32,13 +32,13 @@
                                 </p:inputText>
 
                                 <h:outputLabel value="Address:"/>
-                                <h:inputTextarea cols="30" rows="5">
+                                <h:inputTextarea cols="30" rows="5" value="#{suppManagedBean.address}">
 
                                 </h:inputTextarea>
 
                                 <h:outputLabel value="District:"/>
                                 <h:selectOneMenu value="#{suppManagedBean.distID}">
-                                    <f:selectItems value="#{catererManagedBean.listD()}" var="sup" itemLabel="#{sup.distname}" itemValue="#{sup.districtId}"/>
+                                    <f:selectItems value="#{suppManagedBean.listD()}" var="sup" itemLabel="#{sup.distname}" itemValue="#{sup.districtId}"/>
                                 </h:selectOneMenu>
 
                                 <h:outputLabel value="Status"/>
@@ -46,6 +46,9 @@
                                     <f:selectItem itemLabel="Active" itemValue="#{true}" />
                                     <f:selectItem itemLabel="Disable" itemValue="#{false}" />
                                 </p:selectOneRadio> 
+                                
+                                <h:outputText value=""/>
+                                <h:outputText value="#{suppManagedBean.mess}"/>
 
                                 <h:outputText value=""/>
                                 <h:panelGroup>

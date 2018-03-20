@@ -98,8 +98,13 @@ public class SuppManagedBean {
         return supplierFacade.findAll();
     }
     
+    public List<District> listD(){
+        return districtFacade.findAll();
+    }
+    
     public String findSupp(int id){
         Supplier sp = supplierFacade.find(id);
+        setSupID(id);
         setName(sp.getName());
         setAddress(sp.getAddress());
         setPhone(sp.getPhone());
@@ -120,6 +125,7 @@ public class SuppManagedBean {
             supplierFacade.edit(sp);
             return "supplier";
         }catch(Exception e){
+            mess = e.getMessage();
             return "updatesupp";
         }
     }
@@ -127,10 +133,11 @@ public class SuppManagedBean {
     public String createSupp(){
         try{
             District ds = districtFacade.find(distID);
-            Supplier sp = new Supplier(supID, name, address, phone, status, ds);
+            Supplier sp = new Supplier(name, address, phone, status, ds);
             supplierFacade.create(sp);
             return "supplier";
         }catch(Exception e){
+            mess = "met qua";
             return "createsupp";
         }
     }
