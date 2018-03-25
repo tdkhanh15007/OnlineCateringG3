@@ -7,6 +7,7 @@
 package MySsbean;
 
 import MyEntity.Worker;
+import MyEntity.WorkerType;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -30,6 +31,7 @@ public interface WorkerFacadeLocal {
     List<Worker> findRange(int[] range);
 
     int count();
+
+    public List<Worker> findType(WorkerType id);
     
-    List<Worker> findType(int type);
 }

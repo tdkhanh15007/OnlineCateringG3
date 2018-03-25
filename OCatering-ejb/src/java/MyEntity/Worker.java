@@ -7,28 +7,23 @@
 package MyEntity;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -43,12 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Worker.findByName", query = "SELECT w FROM Worker w WHERE w.name = :name"),
     @NamedQuery(name = "Worker.findByAddress", query = "SELECT w FROM Worker w WHERE w.address = :address"),
     @NamedQuery(name = "Worker.findByPhone", query = "SELECT w FROM Worker w WHERE w.phone = :phone"),
-    @NamedQuery(name = "Worker.findByDatejoin", query = "SELECT w FROM Worker w WHERE w.datejoin = :datejoin")})
+    @NamedQuery(name = "Worker.findByDatejoin", query = "SELECT w FROM Worker w WHERE w.datejoin = :datejoin"),
+    @NamedQuery(name = "Worker.findByStatus", query = "SELECT w FROM Worker w WHERE w.status = :status")})
 public class Worker implements Serializable {
-    @ManyToMany(mappedBy = "workerCollection")
-    private Collection<CusOrder> cusOrderCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "workerId")
-    private Collection<WorkerSalary> workerSalaryCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -74,6 +66,8 @@ public class Worker implements Serializable {
     @Column(name = "datejoin")
     @Temporal(TemporalType.DATE)
     private Date datejoin;
+    @Column(name = "status")
+    private Boolean status;
     @JoinColumn(name = "district_id", referencedColumnName = "district_id")
     @ManyToOne(optional = false)
     private District districtId;
@@ -84,6 +78,22 @@ public class Worker implements Serializable {
     public Worker() {
     }
 
+    public District getDistrictId() {
+        return districtId;
+    }
+
+    public void setDistrictId(District districtId) {
+        this.districtId = districtId;
+    }
+
+    public WorkerType getWorktypeId() {
+        return worktypeId;
+    }
+
+    public void setWorktypeId(WorkerType worktypeId) {
+        this.worktypeId = worktypeId;
+    }  
+    
     public Worker(Integer workerId) {
         this.workerId = workerId;
     }
@@ -135,20 +145,12 @@ public class Worker implements Serializable {
         this.datejoin = datejoin;
     }
 
-    public District getDistrictId() {
-        return districtId;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setDistrictId(District districtId) {
-        this.districtId = districtId;
-    }
-
-    public WorkerType getWorktypeId() {
-        return worktypeId;
-    }
-
-    public void setWorktypeId(WorkerType worktypeId) {
-        this.worktypeId = worktypeId;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     @Override
@@ -176,29 +178,12 @@ public class Worker implements Serializable {
         return "MyEntity.Worker[ workerId=" + workerId + " ]";
     }
 
-    @XmlTransient
-    public Collection<CusOrder> getCusOrderCollection() {
-        return cusOrderCollection;
-    }
-
-    public void setCusOrderCollection(Collection<CusOrder> cusOrderCollection) {
-        this.cusOrderCollection = cusOrderCollection;
-    }
-
-    @XmlTransient
-    public Collection<WorkerSalary> getWorkerSalaryCollection() {
-        return workerSalaryCollection;
-    }
-
-    public void setWorkerSalaryCollection(Collection<WorkerSalary> workerSalaryCollection) {
-        this.workerSalaryCollection = workerSalaryCollection;
-    }
-
-    public Worker(String name, String address, String phone, Date datejoin, District districtId, WorkerType worktypeId) {
+    public Worker(String name, String address, String phone, Date datejoin, Boolean status, District districtId, WorkerType worktypeId) {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.datejoin = datejoin;
+        this.status = status;
         this.districtId = districtId;
         this.worktypeId = worktypeId;
     }

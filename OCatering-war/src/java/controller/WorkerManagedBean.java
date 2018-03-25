@@ -35,6 +35,15 @@ public class WorkerManagedBean {
     int workerID, worktype, distID;
     String name, address, phone, mess = "";
     Date datejoin;
+    boolean status;
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
     public int getWorkerID() {
         return workerID;
@@ -103,6 +112,10 @@ public class WorkerManagedBean {
     public List<District> listD() {
         return districtFacade.findAll();
     }
+    
+    public List<WorkerType> listT() {
+        return workerTypeFacade.findAll();
+    }
 
     /**
      * Creates a new instance of WorkerManagedBean
@@ -110,15 +123,29 @@ public class WorkerManagedBean {
     public WorkerManagedBean() {
     }
 
-    public List<Worker> listWorker(int id) {
-        return workerFacade.findType(id);
+    public String idtotype(int id) {
+        WorkerType wt = workerTypeFacade.find(id);
+        return wt.getType();
+    }
+
+    public String findWorker(int id) {
+        Worker wk = workerFacade.find(id);
+        setWorkerID(id);
+        setName(wk.getName());
+        setAddress(wk.getAddress());
+        setPhone(wk.getPhone());
+        setDistID(wk.getDistrictId().getDistrictId());
+        setWorktype(1);
+        setStatus(wk.getStatus());
+        return "updateworker";
     }
 
     public String create() {
         try {
             District ds = districtFacade.find(distID);
             WorkerType type = workerTypeFacade.find(worktype);
-            Worker worker = new Worker(name, address, phone, datejoin, ds, type);
+            Date date = new Date();
+            Worker worker = new Worker(name, address, phone, date, status, ds, type);
             workerFacade.create(worker);
             return "worker";
         } catch (Exception e) {
@@ -137,9 +164,23 @@ public class WorkerManagedBean {
             wk.setPhone(phone);
             wk.setWorktypeId(type);
             wk.setDistrictId(ds);
+            wk.setStatus(status);
+            wk.setDatejoin(wk.getDatejoin());
+            workerFacade.edit(wk);
             return "worker";
         } catch (Exception e) {
+            mess = "Can not update";
             return "updateworker";
         }
+    }
+
+    public String action1(int id) {
+        setWorktype(id);
+        return "worker.xhtml?id="+id;
+    }
+
+    public List<Worker> listbyType(int id) {
+        WorkerType wt = workerTypeFacade.find(id);
+        return workerFacade.findType(wt);
     }
 }

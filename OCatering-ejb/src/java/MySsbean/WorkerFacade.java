@@ -7,6 +7,7 @@
 package MySsbean;
 
 import MyEntity.Worker;
+import MyEntity.WorkerType;
 import MyEntity.Worker_;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -34,16 +35,15 @@ public class WorkerFacade extends AbstractFacade<Worker> implements WorkerFacade
     public WorkerFacade() {
         super(Worker.class);
     }
-
+    
     @Override
-    public List<Worker> findType(int type) {
+    public List<Worker> findType(WorkerType wt) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery query = builder.createQuery();
         Root root = query.from(Worker.class);
         query.select(root);
-        query.where(builder.equal(root.get(Worker_.worktypeId),type));
+        query.where(builder.equal(root.get(Worker_.worktypeId), wt));
         Query q = em.createQuery(query);
         return q.getResultList();
     }
-    
 }
