@@ -16,6 +16,8 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -36,6 +38,24 @@ public class WorkerManagedBean {
     String name, address, phone, mess = "";
     Date datejoin;
     boolean status;
+    Worker woker;
+    String backuri;
+
+    public String getBackuri() {
+        return backuri;
+    }
+
+    public void setBackuri(String backuri) {
+        this.backuri = backuri;
+    }
+
+    public Worker getWoker() {
+        return woker;
+    }
+
+    public void setWoker(Worker woker) {
+        this.woker = woker;
+    }
 
     public boolean isStatus() {
         return status;
@@ -112,7 +132,7 @@ public class WorkerManagedBean {
     public List<District> listD() {
         return districtFacade.findAll();
     }
-    
+
     public List<WorkerType> listT() {
         return workerTypeFacade.findAll();
     }
@@ -128,16 +148,15 @@ public class WorkerManagedBean {
         return wt.getType();
     }
 
-    public String findWorker(int id) {
-        Worker wk = workerFacade.find(id);
+    public void findWorker(int id) {
+        woker = workerFacade.find(id);
         setWorkerID(id);
-        setName(wk.getName());
-        setAddress(wk.getAddress());
-        setPhone(wk.getPhone());
-        setDistID(wk.getDistrictId().getDistrictId());
-        setWorktype(1);
-        setStatus(wk.getStatus());
-        return "updateworker";
+        setName(woker.getName());
+        setAddress(woker.getAddress());
+        setPhone(woker.getPhone());
+        setWorktype(woker.getWorktypeId().getWorktypeId());
+        setDistID(woker.getDistrictId().getDistrictId());
+        setStatus(woker.getStatus());
     }
 
     public String create() {
@@ -156,31 +175,35 @@ public class WorkerManagedBean {
 
     public String update(int id) {
         try {
-            District ds = districtFacade.find(distID);
-            WorkerType type = workerTypeFacade.find(worktype);
             Worker wk = workerFacade.find(id);
+            District ds = districtFacade.find(distID);
+            WorkerType wt = workerTypeFacade.find(worktype);
             wk.setName(name);
             wk.setAddress(address);
             wk.setPhone(phone);
-            wk.setWorktypeId(type);
+            wk.setWorktypeId(wt);
             wk.setDistrictId(ds);
             wk.setStatus(status);
             wk.setDatejoin(wk.getDatejoin());
             workerFacade.edit(wk);
-            return "worker";
+            return "index";
         } catch (Exception e) {
             mess = "Can not update";
-            return "updateworker";
+            return ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRequestURI();
         }
-    }
-
-    public String action1(int id) {
-        setWorktype(id);
-        return "worker.xhtml?id="+id;
     }
 
     public List<Worker> listbyType(int id) {
         WorkerType wt = workerTypeFacade.find(id);
         return workerFacade.findType(wt);
     }
+
+//    public String action1() {
+//        FacesContext facesContext = FacesContext.getCurrentInstance();
+//        String id = facesContext.getExternalContext().getRequestParameterMap().get("itemID");
+//        String str = ((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getRequestURI();
+//        setBackuri(str + "?id=" + id);
+//        return "createworker";
+//    }
+
 }

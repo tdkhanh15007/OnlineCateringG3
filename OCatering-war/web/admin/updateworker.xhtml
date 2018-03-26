@@ -18,6 +18,7 @@
                         </h1>
                     </section>
                     <section class="content">
+                        #{workerManagedBean.findWorker(param.id)}
                         <h:form>
                             <h:panelGrid columns="2">
                                 <h:outputLabel value="Name:"/>
@@ -56,10 +57,11 @@
 
                                 <h:outputText value=""/>
                                 <h:panelGroup>
-                                    <h:commandButton style="background-color: #367fa9;height:40px; font-size: 14px; font-weight: bold; color: white" action="#{workerManagedBean.create()}" value="Create" />  &nbsp;
-                                    <h:commandButton style="background-color: #367fa9;height:40px; font-size: 14px; font-weight: bold; color: white" action="#{workerManagedBean.action1(workerManagedBean.worktype)}" value="Back" />
+                                    <h:commandButton style="background-color: #367fa9;height:40px; font-size: 14px; font-weight: bold; color: white" action="#{workerManagedBean.update(workerManagedBean.workerID)}" value="Update" />  &nbsp;
+                                    Back
                                 </h:panelGroup>
                             </h:panelGrid>
+                            <h:outputText value="#{workerManagedBean.mess}"/>
                         </h:form>
                     </section>
                 </div>

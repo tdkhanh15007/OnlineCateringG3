@@ -16,7 +16,10 @@
                         <h1>
                             #{workerManagedBean.idtotype(param.id)} List
                         </h1>
-                        <h:link outcome="createworker.xhtml?id=#{param.id}" value="Create"/>
+                        <h:form>
+                            <input type="hidden" class="span1" name="itemID" value="#{param.id}"/>
+                            <h:commandLink value="Create" action="#{workerManagedBean.action1()}"/>
+                        </h:form>
                     </section>   
                     <section class="content">
                         <p:dataTable value="#{workerManagedBean.listbyType(param.id)}" var="item">
@@ -48,11 +51,9 @@
                                 <h:graphicImage id="notCorrectImage" value="images/icons8-delete-24.png" rendered="#{not item.status}"/>
                             </p:column>
                             <p:column>
-                                <h:form>
-                                    <h:commandLink action="#{workerManagedBean.findWorker(item.workerId)}">
-                                        <h:graphicImage value="images/icons8-edit-property-24.png"/>
-                                    </h:commandLink>
-                                </h:form>
+                                <h:link outcome="updateworker?id=#{item.workerId}">
+                                    <h:graphicImage value="images/icons8-edit-property-24.png"/>
+                                </h:link>                                        
                             </p:column>
                         </p:dataTable>
                     </section>
