@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+        
+
+    <h:body>
+
+        <ui:composition template="template/commonLayout.xhtml">
+            <ui:define name="content">                
+                <div class="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <h1>
+                            Change password
+                        </h1>
+                        
+                    </section>
+                        
+                    
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+                    <h:form class="login100-form validate-form">
+                        
+                        <span class="login100-form-title p-b-49">
+                        </span>
+
+                        <div class="wrap-input100 validate-input m-b-23" data-validate = "old password is required">
+                            <span class="label-input100">Curent password: </span>
+                            
+                            <h:inputSecret class="input100" id="oldpassword" value="#{catererMB.oldpass}" required="true"
+				requiredMessage="Please enter password">			
+                            </h:inputSecret>
+                            
+                            <span class="focus-input100" data-symbol="&#xf206;"></span>
+                        </div>
+
+
+                        <div class="wrap-input100 validate-input m-b-23" data-validate = "new password is required">
+                            <span class="label-input100">New password: </span>
+                            <h:inputSecret class="input100" id="password" value="#{catererMB.newpass}" required="true"
+				requiredMessage="Please enter password">
+				<f:validator validatorId="passwordValidator" />
+				<f:attribute name="confirmPassword" value="#{confirmPassword}" />
+                            </h:inputSecret>
+                            <h:message for="password" style="color: red;" />
+                            <span class="focus-input100" data-symbol="&#xf190;"></span>
+                        </div>
+                        
+                        
+
+                        <div class="wrap-input100 validate-input m-b-23" data-validate = "confirm new password is required">
+                            <span class="label-input100">Confirm new password: </span>
+                            <h:inputSecret class="input100" id="confirmPassword" required="true"
+                                           binding="#{confirmPassword}" value="#{catererMB.cfnewpass}" requiredMessage="Please enter confirm password" />
+                            <h:message for="confirmPassword" style="color: red;" />
+                            <span class="focus-input100" data-symbol="&#xf190;"></span>
+                        </div>
+                        
+
+
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <h:commandButton class="login100-form-btn" type="submit" action="#{catererMB.changePassword()}" value="Change"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                
+                                <input type="button" value="back" class="login100-form-btn"/>
+                                           
+                                    
+
+                                
+
+                            </div>
+                        </div>
+
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="dropDownSelect1"></div>
+
+        <!--===============================================================================================-->
+        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/animsition/js/animsition.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/bootstrap/js/popper.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/select2/select2.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/daterangepicker/moment.min.js"></script>
+        <script src="vendor/daterangepicker/daterangepicker.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/countdowntime/countdowntime.js"></script>
+        <!--===============================================================================================-->
+        <script src="js/main.js"></script>
+                        
+
+                    </section><!-- /.content -->
+                </div><!-- /.content-wrapper -->
+
+                <!-- Main Footer -->
+
+
+                <!-- Control Sidebar -->
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>
+

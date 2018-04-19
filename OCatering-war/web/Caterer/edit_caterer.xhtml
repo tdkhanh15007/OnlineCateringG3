@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+        
+    <h:body>
+
+        <ui:composition template="template/commonLayout.xhtml">
+            <ui:define name="content">                
+                <div class="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <h1>
+                            Edit information
+                        </h1>
+                        
+                    </section>
+                       
+                    <!-- Main content -->
+                    <section class="content">
+                        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+                    <h:form class="login100-form validate-form">
+                        
+                        <span class="login100-form-title p-b-49">
+                        </span>
+
+                        <div class="wrap-input100 validate-input m-b-23" data-validate = "Name is required">
+                            <span class="label-input100">Caterer Name: </span>
+                            <h:inputText a:placeholder="#{catererMB.caterers.catererName}" class="input100" id="login"  value="#{catererMB.ctrname}"/>
+                            <span class="focus-input100" data-symbol="&#xf206;"></span>
+                        </div>
+
+
+                        <div class="wrap-input100 validate-input m-b-23" data-validate = "phone is required">
+                            <span class="label-input100">Phone</span>
+                            <h:inputText a:placeholder="#{catererMB.caterers.phone}" class="input100" id="phone"  value="#{catererMB.ctrphone}"/>
+                            <span class="focus-input100" data-symbol="&#xf190;"></span>
+                        </div>
+                        
+                        <div class="wrap-input100 validate-input m-b-23" data-validate = "Dictrict is required">
+                            <span class="label-input100">Dictrict: </span>
+                            
+                            <h:selectOneMenu class="input100" value="#{catererMB.drr}"  >
+                                
+                                <f:selectItems  value="#{catererMB.showlistdt()}" var="c" 
+                                                itemLabel="#{c.distname}" itemValue="#{c.districtId}" />
+                                    
+                              
+                            </h:selectOneMenu><br/>
+                            <span class="focus-input100"></span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input m-b-23" data-validate = "address is required">
+                            <span class="label-input100">address</span>
+                            <h:inputText a:placeholder="#{catererMB.caterers.address}" class="input100" id="address"  value="#{catererMB.ctrddress}"/>
+                            <span class="focus-input100" data-symbol="&#xf190;"></span>
+                        </div>
+                        
+
+
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                <h:commandButton class="login100-form-btn" type="submit" action="#{catererMB.updateCarterer()}" value="Update"/>
+                            </div>
+                        </div>
+                        <br/>
+                        <div class="container-login100-form-btn">
+                            <div class="wrap-login100-form-btn">
+                                <div class="login100-form-bgbtn"></div>
+                                
+                                <input type="button" value="back" class="login100-form-btn"/>
+                                           
+                                    
+
+                                
+
+                            </div>
+                        </div>
+
+                    </h:form>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="dropDownSelect1"></div>
+
+        <!--===============================================================================================-->
+        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/animsition/js/animsition.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/bootstrap/js/popper.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/select2/select2.min.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/daterangepicker/moment.min.js"></script>
+        <script src="vendor/daterangepicker/daterangepicker.js"></script>
+        <!--===============================================================================================-->
+        <script src="vendor/countdowntime/countdowntime.js"></script>
+        <!--===============================================================================================-->
+        <script src="js/main.js"></script>
+                        
+
+                    </section><!-- /.content -->
+                </div><!-- /.content-wrapper -->
+
+                <!-- Main Footer -->
+
+
+                <!-- Control Sidebar -->
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>
