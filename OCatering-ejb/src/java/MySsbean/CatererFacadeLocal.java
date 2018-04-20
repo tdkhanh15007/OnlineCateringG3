@@ -30,5 +30,7 @@ public interface CatererFacadeLocal {
     List<Caterer> findRange(int[] range);
 
     int count();
+
+    public boolean checklogin(String a, String b);
     
 }

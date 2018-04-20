@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     
 
     <h:body>
-
         <ui:composition template="template/commonLayout.xhtml">
             <ui:define name="content">                
                 <div class="content-wrapper">
@@ -16,7 +15,7 @@
                             caterer information
                             <small>(Total users under Admin permissions)</small>
                         </h1>
-                        <h:link outcome="edit_caterer" value="edit info"/>
+                        <h:link outcome="edit_caterer" value="edit info"/><br/>
                         <h:link outcome="change_pass" value="change password"/>
                     </section>
 
