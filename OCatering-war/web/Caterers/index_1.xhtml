@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    
+    <h:body>
+
+        <ui:composition template="template/commonLayout.xhtml">
+            <ui:define name="content">                
+                <div class="content-wrapper">
+                    <!-- Content Header (Page header) -->
+                    <section class="content-header">
+                        <h1>
+                            Admin List
+                            <small>(Total users under Admin permissions)</small>
+                        </h1>
+                        <h:link outcome="edit_caterer" value="edit information"/><br/>
+                        <h:link outcome="change_pass" value="change password"/>
+                    </section>
+
+                    <!-- Main content -->
+                    <section class="content">
+
+                      
+                        <h:outputLabel value="caterer name:"/>     <!-- Your Page Content Here -->
+                        <h:outputText value="#{catererMB.caterers.catererName}"/><br/>  
+                        <h:outputLabel value="caterer phone:"/>     <!-- Your Page Content Here -->
+                        <h:outputText value="#{catererMB.caterers.phone}"/>  <br/>
+                        <h:outputLabel value="caterer district:"/>     <!-- Your Page Content Here -->
+                        <h:outputText value="#{catererMB.caterers.districtId.distname}"/>  <br/>
+                        <h:outputLabel value="caterer address:"/>     <!-- Your Page Content Here -->
+                        <h:outputText value="#{catererMB.caterers.address}"/>  <br/>
+                         
+                        
+                        
+
+                    </section><!-- /.content -->
+                </div><!-- /.content-wrapper -->
+
+                <!-- Main Footer -->
+
+
+                <!-- Control Sidebar -->
+
+            </ui:define>
+        </ui:composition>
+
+    </h:body>
+
+</html>
